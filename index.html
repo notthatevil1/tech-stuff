@@ -21,6 +21,10 @@ header {
   background-color: #fff;
   text-align: center;
   padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 header img {
   max-width: 100%;
@@ -41,6 +45,9 @@ h2 {
   display: flex;
   align-items: center;
   margin: 0.75rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
 }
 .service-item img {
   width: 50px;
@@ -78,6 +85,14 @@ footer {
 .button a:hover {
   background-color: #cf6511;
   transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive Tweaks for Mobile */
@@ -131,7 +146,7 @@ footer {
 <div class="service-item"><img src="icon_tv_mounting.png" alt="Bundle"><span>TV Mount + Streaming Setup – <span class="price">$160</span></span></div>
 </section>
 
-<section>
+<section id="contact">
 <h2>Contact</h2>
 <p>Want to schedule a setup, get a quote, or ask a question?</p>
 <p><strong>Call or Text:</strong> (401) 663-3604</p>
@@ -139,7 +154,7 @@ footer {
 </section>
 
 <div class="button">
-  <a href="mailto:jtstory1982@gmail.com">Book Now</a>
+  <a href="#contact">Book Now</a>
 </div>
 </main>
 
