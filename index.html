@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tech-Stuff | Smart Home & Tech Services</title>
 <style>
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: Arial, sans-serif;
   background-color: #f7f7f7;
@@ -24,7 +27,7 @@ header img {
   height: auto;
 }
 main {
-  padding: 2rem;
+  padding: 2rem 1rem;
   max-width: 800px;
   margin: auto;
 }
@@ -51,9 +54,10 @@ h2 {
 }
 footer {
   text-align: center;
-  padding: 2rem;
+  padding: 1.5rem 1rem;
   background-color: #1f2937;
-  color: white;
+  color: #ccc;
+  font-size: 0.9rem;
 }
 .button {
   text-align: center;
@@ -74,6 +78,20 @@ footer {
 .button a:hover {
   background-color: #cf6511;
   transform: scale(1.05);
+}
+
+/* Responsive Tweaks for Mobile */
+@media (max-width: 600px) {
+  main {
+    padding: 1.5rem 1rem;
+  }
+  .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .service-item img {
+    margin-bottom: 0.5rem;
+  }
 }
 </style>
 </head>
