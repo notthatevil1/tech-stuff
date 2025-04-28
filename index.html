@@ -11,6 +11,8 @@ body {
   color: #222;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 header {
   background-color: #fff;
@@ -38,8 +40,9 @@ h2 {
   margin: 0.75rem 0;
 }
 .service-item img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
   margin-right: 1rem;
 }
 .price {
@@ -57,12 +60,20 @@ footer {
   margin-top: 2rem;
 }
 .button a {
+  display: inline-block;
   background-color: #e8791d;
   color: white;
-  padding: 12px 24px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+.button a:hover {
+  background-color: #cf6511;
+  transform: scale(1.05);
 }
 </style>
 </head>
@@ -82,8 +93,8 @@ footer {
 
 <section>
 <h2>TV Mounting & Entertainment</h2>
-<div class="service-item"><img src="55_under_mount.png" alt="TV Mounting"><span>TV Mounting (under 55\") – <span class="price">$100</span></span></div>
-<div class="service-item"><img src="55_over_mount.png" alt="TV Mounting"><span>TV Mounting (55\"+) – <span class="price">$120</span></span></div>
+<div class="service-item"><img src="55_under_mount.png" alt="TV Mounting"><span>TV Mounting (under 55") – <span class="price">$100</span></span></div>
+<div class="service-item"><img src="55_over_mount.png" alt="TV Mounting"><span>TV Mounting (55"+) – <span class="price">$120</span></span></div>
 <div class="service-item"><img src="Sreaming_plus_mount.png" alt="Streaming"><span>TV Setup + Streaming Services – <span class="price">$80</span></span></div>
 <div class="service-item"><img src="icon_sound_bar.png" alt="Soundbar"><span>Soundbar Setup – <span class="price">$80</span></span></div>
 <div class="service-item"><img src="icon_surround_sound.png" alt="Surround Sound"><span>Surround Sound Setup – <span class="price">$150</span></span></div>
