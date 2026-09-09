@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /scripts/
 
 Sitemap: https://tech-stuff.tech/sitemap.xml
