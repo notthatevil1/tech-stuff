@@ -18,6 +18,6 @@ All original root image URLs remain available. Existing homepage and `/#contact`
 
 ## Business facts and assets
 
-Phone and email came from the original production website and business profile. Daily 9 AM–9 PM hours were confirmed by Josh. Pricing comes from Josh's rebuild brief and the original site. No reviews, credentials, service guarantees, or private addresses are invented. LocalBusiness, Service, WebPage, WebSite, and breadcrumb JSON-LD use those verified details. A physical address is intentionally omitted for this service-area business; full Google LocalBusiness rich-result eligibility is not claimed.
+Phone and email came from the original production website and business profile. Daily 9 AM–9 PM hours were confirmed by Josh. Josh confirmed that in-home service covers the broader Portland metro area, including Portland, Beaverton, Tigard, Tualatin, Lake Oswego, Sherwood, and nearby communities. Pricing comes from Josh's rebuild brief and the original site. No reviews, credentials, service guarantees, or private addresses are invented. LocalBusiness, Service, WebPage, WebSite, and breadcrumb JSON-LD use those verified details. A physical address is intentionally omitted for this service-area business; full Google LocalBusiness rich-result eligibility is not claimed.
 
 Inter is self-hosted under the SIL Open Font License in `assets/inter-LICENSE.txt`. Original brand images are preserved. The interface wordmark and favicon are simple text-based brand assets. No fake portrait or testimonial is used.

@@ -9,6 +9,9 @@ for(const p of pages){const file=p.route==='/'?'index.html':p.route.slice(1)+'in
 const sitemap=await readFile('sitemap.xml','utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,pages.length);for(const p of pages)assert(sitemap.includes('https://tech-stuff.tech'+p.route));assert(!(await readFile('robots.txt','utf8')).includes('Disallow: /\n'));assert((await readFile('404.html','utf8')).includes('noindex,follow'));
 assert(docs.get('/about/').includes('alt="Josh Story, owner of Tech-Stuff"'),'About portrait and alt text');
 assert(docs.get('/privacy/').includes('Google Analytics'),'privacy page discloses analytics');
+const home=docs.get('/');
+assert(home.includes('Tech help across the Portland metro.'),'homepage explains the broader service area');
+for(const area of ['Portland, Oregon','Southeast Portland, Oregon','Beaverton, Oregon'])assert(home.includes(`"name":"${area}"`),`homepage LocalBusiness schema includes ${area}`);
 const base=process.argv[2]||'http://localhost:4321';const http=[];
 for(const p of pages){const res=await fetch(base+p.route);assert.equal(res.status,200,`${p.route}: HTTP status`);const html=await res.text();assert(html.includes(`<title>${p.title.replaceAll('&','&amp;')}</title>`),`${p.route}: deployed build mismatch`);assert(html.includes('G-JHT4G7FD48'),`${p.route}: deployed GA4 tag`);assert(html.includes('src="/assets/analytics.js"'),`${p.route}: deployed analytics events`);http.push({route:p.route,status:res.status,bytes:Buffer.byteLength(html)});}
 const missing=await fetch(base+'/this-page-does-not-exist-20260909/');assert.equal(missing.status,404,'Unknown path must return 404');assert((await missing.text()).includes('That page isn’t here.'),'Custom 404 page');
