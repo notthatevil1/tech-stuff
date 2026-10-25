@@ -5,7 +5,9 @@
     if (href.startsWith('tel:')) return ['click_to_call', 'call'];
     if (href.startsWith('sms:')) return ['click_to_text', 'text'];
     if (href.startsWith('mailto:')) return ['click_to_email', 'email'];
+    if (href === '/schedule/' || href.startsWith('/schedule/#')) return ['open_scheduling', 'schedule'];
     if (href.includes('docs.google.com/forms/')) return ['open_contact_form', 'form'];
+    if (href.includes('calendar.google.com/calendar/appointments/') || href.includes('calendar.app.google/')) return ['open_booking_calendar', 'schedule'];
     if (href.startsWith('https://g.page/r/')) return ['click_review_link', 'review'];
     if (href.includes('google.com/maps?cid=')) return ['click_maps_listing', 'maps'];
 
@@ -23,6 +25,22 @@
   };
 
   document.addEventListener('click', (event) => {
+    const serviceButton = event.target.closest('[data-booking-service]');
+    if (serviceButton) {
+      const options = document.querySelectorAll('[data-booking-service]');
+      options.forEach((option) => option.setAttribute('aria-pressed', String(option === serviceButton)));
+      const selection = document.querySelector('#booking-selection');
+      if (selection) selection.textContent = `Selected: ${serviceButton.dataset.bookingLabel}. After you pick a time, enter this same service in the required booking field.`;
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'choose_schedule_service', {
+          service_category: serviceButton.dataset.bookingService,
+          page_path: window.location.pathname,
+          transport_type: 'beacon'
+        });
+      }
+      return;
+    }
+
     const link = event.target.closest('a[href]');
     if (!link) return;
 
