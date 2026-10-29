@@ -6,9 +6,21 @@ Static, accessible, multi-page website served from the root of this repository b
 
 Use Node.js 22 or later. Run `npm ci`, `npm run build`, and `npm run dev`. The local preview runs at http://localhost:4321. Run `npm test` while it is running. To check a production deployment, run `node scripts/check.mjs https://tech-stuff.tech`.
 
+For static validation without a reachable preview server, run `node scripts/check.mjs --static-only`; its output explicitly excludes HTTP checks. The preview server also accepts `--host`, `--port`, and `--strictPort` for managed preview environments.
+
 The source copy and page templates live in `scripts/build.mjs` and `scripts/services.mjs`. Styles live in `assets/site.css`. Generated HTML is committed alongside the source so the existing GitHub Pages deployment continues to work without a new hosting provider or build service.
 
 The contact form uses the public Google Forms responder URL in `scripts/form-config.mjs`. Form editing and responses remain in the owner's Google account. Never add response data, credentials, or private addresses to this public repository. The form allows anonymous submissions and keeps response summaries private. The site does not treat opening an email client as a successful form submission.
+
+## Appointment requests
+
+The public Google schedule and embed URLs are in `scripts/booking-config.mjs`. Its observed request duration is 60 minutes. It is a tentative starting-time request, not a service-specific reservation or an approval workflow. Prices on the website are reference information; customers enter the service once in Google's required booking field. A three-hour block requires Josh to confirm and protect the full three hours, including travel, before treating it as final.
+
+The booking form and private rules remain in Google Calendar. Review the existing **Tech-Stuff Appointment Request** schedule under **Booking pages**, then **Edit**. Verify **Appointment duration**, **General availability** (Pacific time and exceptions), **Scheduling window** (lead time and advance limit), **Booked appointment settings** (buffer and daily cap), **Calendars** (destination and availability checks), **Booking form**, and **Booking confirmations and reminders**. Website copy does not assert that unverified conflict or travel rules are active. Secondary-calendar conflict checks depend on account plan eligibility.
+
+Before changing the URLs or request duration, test the embed and standalone fallback. Select an offered time and check that the required contact, service, and location fields appear; stop before Book during read-only checks. A controlled submission test must also verify the destination event, full duration, owner and customer notifications, cancellation, and dashboard intake. Use a clearly labeled test reservation, never customer contact details. Compare a known busy period and its buffer boundaries with the public calendar before claiming conflict protection. Check a phone-sized viewport, keyboard access to the price list, and the timezone displayed by Google.
+
+Website analytics record scheduling navigation and price-list opens only. They cannot observe completion inside the cross-origin Google iframe. Do not label those events as successful bookings; confirm requests from Calendar or notification evidence. `scripts/check.mjs` checks the generated site and exact served HTML, not Google's private rules or successful submission.
 
 ## Deployment and rollback
 

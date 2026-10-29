@@ -5,6 +5,7 @@
     if (href.startsWith('tel:')) return ['click_to_call', 'call'];
     if (href.startsWith('sms:')) return ['click_to_text', 'text'];
     if (href.startsWith('mailto:')) return ['click_to_email', 'email'];
+    if (href === '#calendar') return ['jump_to_booking_calendar', 'schedule'];
     if (href === '/schedule/' || href.startsWith('/schedule/#')) return ['open_scheduling', 'schedule'];
     if (href.includes('docs.google.com/forms/')) return ['open_contact_form', 'form'];
     if (href.includes('calendar.google.com/calendar/appointments/') || href.includes('calendar.app.google/')) return ['open_booking_calendar', 'schedule'];
@@ -24,23 +25,17 @@
     return 'page_content';
   };
 
-  document.addEventListener('click', (event) => {
-    const serviceButton = event.target.closest('[data-booking-service]');
-    if (serviceButton) {
-      const options = document.querySelectorAll('[data-booking-service]');
-      options.forEach((option) => option.setAttribute('aria-pressed', String(option === serviceButton)));
-      const selection = document.querySelector('#booking-selection');
-      if (selection) selection.textContent = `Selected: ${serviceButton.dataset.bookingLabel}. After you pick a time, enter this same service in the required booking field.`;
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'choose_schedule_service', {
-          service_category: serviceButton.dataset.bookingService,
-          page_path: window.location.pathname,
-          transport_type: 'beacon'
-        });
-      }
-      return;
-    }
+  // These events measure navigation and price review, not completed bookings.
+  // This page cannot observe submissions inside Google's cross-origin iframe.
+  document.addEventListener('toggle', (event) => {
+    if (!event.target.matches?.('.booking-prices') || !event.target.open || typeof window.gtag !== 'function') return;
+    window.gtag('event', 'view_schedule_prices', {
+      page_path: window.location.pathname,
+      transport_type: 'beacon'
+    });
+  }, true);
 
+  document.addEventListener('click', (event) => {
     const link = event.target.closest('a[href]');
     if (!link) return;
 
