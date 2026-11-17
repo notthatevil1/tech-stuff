@@ -21,6 +21,11 @@ assert(schedule.includes('calendar.google.com/calendar/appointments/schedules/')
 assert(schedule.includes('calendar.app.google/'),'schedule page has a direct booking fallback link');
 const home=docs.get('/');
 assert(home.includes('Tech help across the Portland metro.'),'homepage explains the broader service area');
+assert(home.includes('In-home computer repair.'),'homepage has clear local-service headline');
+assert(home.includes('Examples of work I\'ve handled.'),'homepage includes anonymized job examples');
+assert(home.includes('href="sms:+15036622669"'),'homepage supports direct text contact');
+assert(home.includes('Customer names and identifying details are intentionally omitted.'),'customer privacy note exists');
+assert(sitemap.includes('<loc>https://tech-stuff.tech/</loc><lastmod>2026-11-16</lastmod>'),'homepage sitemap modification date updated');
 for(const area of ['Portland, Oregon','Southeast Portland, Oregon','Beaverton, Oregon'])assert(home.includes(`"name":"${area}"`),`homepage LocalBusiness schema includes ${area}`);
 const staticOnly=process.argv.includes('--static-only');
 const base=process.argv.slice(2).find(arg=>!arg.startsWith('--'))||'http://localhost:4321';const http=[];
